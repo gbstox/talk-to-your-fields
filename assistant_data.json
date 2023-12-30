@@ -1,0 +1,171 @@
+{
+    "id": "asst_6LtS8MoQeQM6oyKOdS3jhfPT",
+    "object": "assistant",
+    "created_at": 1702484562,
+    "name": "Leaf model",
+    "description": null,
+    "model": "gpt-4-1106-preview",
+    "instructions": "You are to help users navigate their Leaf API account. \n\nIn Leaf, Operations are Field Operations like Planting, Applications, Harvesting, and Tillage. Fields are areas on land that Operations happen on. \n\nTry to give complete answers, but ask to proceed if you are going to make any more function calls that are not absolutely necessary to answer the initial question.\n\n\n",
+    "tools": [
+        {
+            "type": "code_interpreter"
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "get_operations",
+                "description": "Gets a paged list of operations. It is possible to filter the results by passing some query parameters.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "token": {
+                            "type": "string",
+                            "description": "The authentication token"
+                        },
+                        "leafUserId": {
+                            "type": "string",
+                            "description": "UUID of one of your users"
+                        },
+                        "provider": {
+                            "type": "string",
+                            "description": "The provider of the operation. Valid values are: CNHI, JohnDeere, Trimble, ClimateFieldView, AgLeader, Stara or Leaf"
+                        },
+                        "startTime": {
+                            "type": "string",
+                            "description": "ISO 8601 date. Returns operations from the startTime onward"
+                        },
+                        "updatedTime": {
+                            "type": "string",
+                            "description": "ISO 8601 date. Returns operations from the updatedTime onward"
+                        },
+                        "endTime": {
+                            "type": "string",
+                            "description": "ISO 8601 date. Returns operations until the endTime"
+                        },
+                        "operationType": {
+                            "type": "string",
+                            "description": "The type of the operation. Valid values are: applied, planted, harvested or tillage"
+                        },
+                        "fieldId": {
+                            "type": "string",
+                            "description": "The ID of the field where the operation happened"
+                        },
+                        "page": {
+                            "type": "integer",
+                            "description": "An integer specifying the page being fetched (default is 0)"
+                        },
+                        "size": {
+                            "type": "integer",
+                            "description": "An integer specifying the size of the page (max is 100)"
+                        },
+                        "sort": {
+                            "type": "string",
+                            "description": "The sorting order of the results; can be multi-value, where the first value to be passed will have preference in ordering over the next ones; you can also specify the order as asc or desc with asc being the default. Example: id, desc. Valid values for sorting are: id, leafUserId, startTime, endTime, type and updatedTime."
+                        }
+                    },
+                    "required": [
+                        "token"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "get_fields",
+                "description": "Gets a paged list of Fields. It is possible to filter the results by passing some query parameters.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "token": {
+                            "type": "string",
+                            "description": "The authentication token"
+                        },
+                        "type": {
+                            "type": "string",
+                            "description": "Only matches fields with this type. Always use 'ORIGINAL'."
+                        },
+                        "farmId": {
+                            "type": "integer",
+                            "description": "Only matches fields from this farmId"
+                        },
+                        "provider": {
+                            "type": "string",
+                            "description": "Only matches fields from this provider"
+                        },
+                        "leafUserId": {
+                            "type": "string",
+                            "description": "Only matches fields from this user"
+                        },
+                        "page": {
+                            "type": "integer",
+                            "description": "An integer specifying the page being fetched"
+                        },
+                        "size": {
+                            "type": "integer",
+                            "description": "An integer specifying the size of the page (defaults to 20)"
+                        }
+                    },
+                    "required": [
+                        "token"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "get_operation_summary",
+                "description": "Fetches the summary of a specified operation",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "token": {
+                            "type": "string",
+                            "description": "Authorization token for API access"
+                        },
+                        "operation_id": {
+                            "type": "string",
+                            "description": "The unique identifier for the operation"
+                        }
+                    },
+                    "required": [
+                        "token",
+                        "operation_id"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "get_single_field",
+                "description": "Retrieves data for a single field based on the user and field ID",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "token": {
+                            "type": "string",
+                            "description": "Authorization token for API access"
+                        },
+                        "leafUserId": {
+                            "type": "string",
+                            "description": "The unique identifier for the Leaf user"
+                        },
+                        "fieldId": {
+                            "type": "string",
+                            "description": "The unique identifier for the field"
+                        }
+                    },
+                    "required": [
+                        "token",
+                        "leafUserId",
+                        "fieldId"
+                    ]
+                }
+            }
+        }
+    ],
+    "file_ids": [],
+    "metadata": {}
+}
