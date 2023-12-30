@@ -4,11 +4,11 @@ import leaf
 import time
 import os
 
-# Set your Leaf username & password
+# Set your Leaf username & password (get these here: https://withleaf.io/account/quickstart)
 leaf_username = os.environ["LEAF_USERNAME"]
 leaf_password = os.environ["LEAF_PASSWORD"]
 
-#Set your OpenAI API key
+# Set your OpenAI API key
 OPENAI_API_KEY = os.environ['OPENAI_API_KEY']
 
 LEAF_ASSISTANT_ID = "asst_6LtS8MoQeQM6oyKOdS3jhfPT"

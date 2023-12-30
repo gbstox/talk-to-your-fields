@@ -10,10 +10,7 @@ def authenticate_with_leaf(leaf_username, leaf_password, remember_me=True):
       "rememberMe": str(remember_me).lower()
   }
   auth_response = requests.post(auth_url, json=auth_data)
-  try: 
-    return auth_response.json()['id_token']
-  except Exception as e:
-    print("problem authenticating, please try again ", e)
+  return auth_response.json()['id_token']
 
 
 def get_fields(token,
